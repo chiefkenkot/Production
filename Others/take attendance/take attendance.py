@@ -1,42 +1,42 @@
-# import datetime
-# import time
-#
-# import pandas as pd
-#
-# students = ["John", "Jane", "Tom", "Alice"]  # 學生名單
-#
-# def take_attendance():
-#     present_students = []  # 出席學生清單
-#     print('================================================')
-#     print('If student shows up, enter y, otherwise enter n')
-#     print('================================================')
-#
-#     for student in students:
-#         attendance = input("請輸入{}是否出席（是/否）：".format(student))
-#         if attendance == "y":
-#             present_students.append(student)
-#
-#     print("出席學生清單：")
-#     for student in present_students:
-#         print(student)
-#
-#
-#
-#     return present_students
-#
-# present_students = take_attendance()
-#
-# dates = [datetime.date.today()]*len(present_students)
-#
-# data = {'Dates': dates, 'Name':present_students}
-#
-# df = pd.DataFrame(data)
-# csv_name = df.to_csv(f'{datetime.date.today()} Attendance.CSV')
-#
-# print(df)
-# print(f'CSV file has been created: {csv_name}')
-# print(f'The system will automatically close in 10 sec')
-# time.sleep(10)
+import datetime
+import time
+
+import pandas as pd
+
+students = ["John", "Jane", "Tom", "Alice"]  # 學生名單
+
+def take_attendance():
+    present_students = []  # 出席學生清單
+    print('================================================')
+    print('If student shows up, enter y, otherwise enter n')
+    print('================================================')
+
+    for student in students:
+        attendance = input("請輸入{}是否出席（是/否）：".format(student))
+        if attendance == "y":
+            present_students.append(student)
+
+    print("出席學生清單：")
+    for student in present_students:
+        print(student)
+
+
+
+    return present_students
+
+present_students = take_attendance()
+
+dates = [datetime.date.today()]*len(present_students)
+
+data = {'Dates': dates, 'Name':present_students}
+
+df = pd.DataFrame(data)
+csv_name = df.to_csv(f'{datetime.date.today()} Attendance.CSV')
+
+print(df)
+print(f'CSV file has been created: {csv_name}')
+print(f'The system will automatically close in 10 sec')
+time.sleep(10)
 
 # demo for multiple sheets in Excel
 # import pandas as pd
