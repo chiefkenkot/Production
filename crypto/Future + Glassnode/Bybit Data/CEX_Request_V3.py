@@ -339,14 +339,12 @@ class ByBitRequest:
         method = "GET"
         response = self.send_http_rquest(end_point, method, params)
         response = response.json()
+        response = response['result']
 
-        if response.get('list'):
-            history = response['list']
-            return history
-        else:
-            return None
+        return response
 
     def get_open_interest(self, category, symbol, interval_time, start_time=None, end_time=None, limit=50, cursor=None):
+        #Interval. 5min,15min,30min,1h,4h,1d
         end_point = "/v5/market/open-interest"
         params_format = "category={category}&symbol={symbol}&intervalTime={interval_time}&limit={limit}"
 
@@ -363,13 +361,11 @@ class ByBitRequest:
         method = "GET"
         response = self.send_http_rquest(end_point, method, params)
         response = response.json()
+        data = response['result']
+        return data
 
-        if response.get('list'):
-            interest_data = response['list']
-            next_cursor = response.get('nextPageCursor')
-            return interest_data, next_cursor
-        else:
-            return None, None
+        #{'retCode': 0, 'retMsg': 'OK', 'result': {'symbol': 'ARKUSDT', 'category': 'linear', 'list': [{'openInterest': '13282008.00000000', 'timestamp': '1694627400000'}, {'openInterest': '13304247.00000000', 'timestamp': '1694627100000'}, {'openInterest': '13336709.00000000', 'timestamp': '1694626800000'}, {'openInterest': '13351031.00000000', 'timestamp': '1694626500000'}, {'openInterest': '13336135.00000000', 'timestamp': '1694626200000'}, {'openInterest': '13305569.00000000', 'timestamp': '1694625900000'}, {'openInterest': '13282809.00000000', 'timestamp': '1694625600000'}, {'openInterest': '13277639.00000000', 'timestamp': '1694625300000'}, {'openInterest': '13218793.00000000', 'timestamp': '1694625000000'}, {'openInterest': '13210495.00000000', 'timestamp': '1694624700000'}, {'openInterest': '13231129.00000000', 'timestamp': '1694624400000'}, {'openInterest': '13228129.00000000', 'timestamp': '1694624100000'}, {'openInterest': '13210080.00000000', 'timestamp': '1694623800000'}, {'openInterest': '13245173.00000000', 'timestamp': '1694623500000'}, {'openInterest': '13255834.00000000', 'timestamp': '1694623200000'}, {'openInterest': '13326372.00000000', 'timestamp': '1694622900000'}, {'openInterest': '13345614.00000000', 'timestamp': '1694622600000'}, {'openInterest': '13358802.00000000', 'timestamp': '1694622300000'}, {'openInterest': '13849674.00000000', 'timestamp': '1694622000000'}, {'openInterest': '13887000.00000000', 'timestamp': '1694621700000'}, {'openInterest': '13933005.00000000', 'timestamp': '1694621400000'}, {'openInterest': '13904963.00000000', 'timestamp': '1694621100000'}, {'openInterest': '13909327.00000000', 'timestamp': '1694620800000'}, {'openInterest': '13918921.00000000', 'timestamp': '1694620500000'}, {'openInterest': '14006279.00000000', 'timestamp': '1694620200000'}, {'openInterest': '13933173.00000000', 'timestamp': '1694619900000'}, {'openInterest': '13873197.00000000', 'timestamp': '1694619600000'}, {'openInterest': '13844205.00000000', 'timestamp': '1694619300000'}, {'openInterest': '14021610.00000000', 'timestamp': '1694619000000'}, {'openInterest': '14192056.00000000', 'timestamp': '1694618700000'}, {'openInterest': '14440643.00000000', 'timestamp': '1694618400000'}, {'openInterest': '14625743.00000000', 'timestamp': '1694618100000'}, {'openInterest': '14697857.00000000', 'timestamp': '1694617800000'}, {'openInterest': '13848346.00000000', 'timestamp': '1694617500000'}, {'openInterest': '13483804.00000000', 'timestamp': '1694617200000'}, {'openInterest': '12390768.00000000', 'timestamp': '1694616900000'}, {'openInterest': '11970892.00000000', 'timestamp': '1694616600000'}, {'openInterest': '12305699.00000000', 'timestamp': '1694616300000'}, {'openInterest': '12235727.00000000', 'timestamp': '1694616000000'}, {'openInterest': '12172735.00000000', 'timestamp': '1694615700000'}, {'openInterest': '12169185.00000000', 'timestamp': '1694615400000'}, {'openInterest': '12189149.00000000', 'timestamp': '1694615100000'}, {'openInterest': '12210523.00000000', 'timestamp': '1694614800000'}, {'openInterest': '12173177.00000000', 'timestamp': '1694614500000'}, {'openInterest': '12056597.00000000', 'timestamp': '1694614200000'}, {'openInterest': '12188747.00000000', 'timestamp': '1694613900000'}, {'openInterest': '12260397.00000000', 'timestamp': '1694613600000'}, {'openInterest': '12281101.00000000', 'timestamp': '1694613300000'}, {'openInterest': '12243297.00000000', 'timestamp': '1694613000000'}, {'openInterest': '12085690.00000000', 'timestamp': '1694612700000'}], 'nextPageCursor': 'lastid%3D68415980%26lasttime%3D1694612700'}, 'retExtInfo': {}, 'time': 1694627449617}
+
 
 
 class BinanceRequest:
