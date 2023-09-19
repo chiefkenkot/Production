@@ -114,12 +114,12 @@ def trading_history(category, symbol):
 
     df = pd.DataFrame(data)
 
-    df['time'] = pd.to_datetime(df['time'].astype(float), unit='ms')
-    now = pd.Timestamp.now(tz='UTC')
-    five_mins_ago = now - pd.Timedelta(minutes=5)
-
-    # Ensure both are in the same format before comparison
-    df = df[df['time'].dt.tz_localize('UTC') > five_mins_ago]
+    # df['time'] = pd.to_datetime(df['time'].astype(float), unit='ms')
+    # now = pd.Timestamp.now(tz='UTC')
+    # five_mins_ago = now - pd.Timedelta(minutes=5)
+    #
+    # # Ensure both are in the same format before comparison
+    # df = df[df['time'].dt.tz_localize('UTC') > five_mins_ago]
 
     total_volume = 0.0
     buy_volume = 0.0
@@ -148,3 +148,7 @@ for symbol in down:
 
 # price drop + oi increase + funding rate < -0.01 : in
 # oi < oi ma : out
+
+
+# buy ratio > 50 + oi / price roc positive = long
+# buy ratio > 50 / oi uptrend / price uptrend > if all match = long
